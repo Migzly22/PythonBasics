@@ -1,24 +1,15 @@
-import asyncio
-from utils.PyLogger import PyLogger
-from utils.FetchUtility import pyFetch
+from utils.ExtractInfo import extraction
+from utils.PyLogger import PyLogger as logs
+from config import OLLAMA_URL
 
-logs = PyLogger
-async def fetchFunc():
-    logs.info("Fetching Please Wait")
-    try:
-        data = await pyFetch.get('https://dummyj1son.com/users', params= { "limit" : 5})
-        #Box transform Dictionary into an object
-        logs.info(f"Output : {data}")
-        
-    except Exception as e:
-        logs.error(e)
 
-    print("DONE")
+
 def main():
-    asyncio.run(fetchFunc()) 
-    logs.info("Done")
+    pdf_path = "./templates/resume.pdf"
+    extracted_text = extraction(pdf_path) # this woll be the 1st information of out own ai
 
+    logs.info("Done")
+    
 
 if __name__ == "__main__":
     main()
-
